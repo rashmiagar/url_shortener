@@ -32,10 +32,10 @@
         <% name = current_user.email.split("@")[0] %>
         Hello <strong><%= name %></strong>
 
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <%= link_to "Logout", logout_path, method: :delete, :class => 'navbar-link'  %>
         <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %>
-          <%= link_to "Login", "", :class => 'navbar-link'  %>
+          <%= link_to "Sign up", signup_path, :class => 'navbar-link'  %>
+          <%= link_to "Login", sessions_new_path, :class => 'navbar-link'  %>
         <% end %>
       </div>
     </div>
