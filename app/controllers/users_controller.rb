@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
     end
-    render "new"
+    redirect_to "/sessions/new"
   end																																	
 
   private

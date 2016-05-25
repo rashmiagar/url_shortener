@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     end
   end
   def destroy
-  	render 'new'
+  	log_out if user_signed_in?
+  	redirect_to sessions_new_url
   end
 end
