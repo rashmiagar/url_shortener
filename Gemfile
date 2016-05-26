@@ -13,7 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt'
 gem 'geocoder'
-gem 'active_model_serializers', '~> 0.9.3'
+gem 'active_model_serializers', '0.8.1'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'

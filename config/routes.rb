@@ -8,4 +8,13 @@ Rails.application.routes.draw do
   resources :shortUrl, :controller => "shortener"
   
   root 'users#home'
+
+  namespace :api, constraints: {format: "json"} do
+  	resources :shortUrl, :controller => "shortener", :only => [:index, :create, :destroy] do
+  	  collection do
+  	  	post "track" => "shortener#track"
+  	    post "untrack" => "shortener#untrack"
+	  end
+	end
+  end
 end
