@@ -13,14 +13,21 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt'
 gem 'geocoder'
+gem 'active_model_serializers', '~> 0.9.3'
 
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
 

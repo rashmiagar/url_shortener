@@ -50,16 +50,15 @@ header {
 	background: #4db6ac;
 	height: 60px;
 }
-/*
+
 .user-sign-in {
 	padding: 3em 0 ;
-}*/
+}
 h1 {
   font-size: 30px !important;
   line-height: 60px !important;
   padding: 0;
   margin: 0 !important;
-  color: #fff;
 }
 h1 a {color: #fff; text-decoration: none;}
 h2 {

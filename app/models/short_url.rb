@@ -4,18 +4,15 @@ class ShortUrl < ActiveRecord::Base
 	has_many :short_visits
 	
 	validates :long_url, presence: true, 
-						format: { with: /[^(http|https):\/\/]/ }
+						format: { with: /[^(http|https):\/\/]/ },
+            uniqueness: {scope: :user_id}
 	validates :shorty, uniqueness: true
 	
+
 	HOST_NAME = 'localhost:3000/shortUrl'
 	UNIQUE_KEY_LENGTH = 5
 
-
-  def shortened_url
-    # use the url writer to generate the url
-    return "http://" + HOST_NAME + "/" + self.unique_key
-  end
-
+ 
   def self.generate(orig_url, user=nil)
     uid = user.nil? ? nil : user.id
     sl = ShortUrl.where("user_id = ? and long_url = ?", uid, orig_url).first
@@ -29,8 +26,13 @@ class ShortUrl < ActiveRecord::Base
 
     return sl.shorty
   end
+  
+  private
 
-
+   def shortened_url
+    # use the url writer to generate the url
+    return "http://" + HOST_NAME + "/" + self.shorty
+  end
 
   def self.generate_random_string(size = 6)
     charset = ('a'..'z').to_a + (0..9).to_a

@@ -1,5 +1,3 @@
-
-
 class ShortenerController < ApplicationController
 	before_action :get_current_user
 
@@ -51,6 +49,15 @@ class ShortenerController < ApplicationController
 	end
 	def update
 	  ShortUrl.find(params[:id]).update(track: params[:track])
+	   respond_to do |format|
+	   	format.js{
+	  		render json: {code: 200}
+	  	}
+	  	format.html {
+	  	  redirect_to action: 'index'
+	  	}
+	  end
+	  
 	end
 
 	private

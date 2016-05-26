@@ -24,8 +24,11 @@
     $.ajax({
       url: '/shortUrl/'+u_id,
       type: 'PATCH',
+      beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
       data: {id: u_id, track: 1},
       success: function(result){
+      	console.log(u_id);
+        $('#delete-'+u_id).hide();
       }
     });
 
