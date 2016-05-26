@@ -1,0 +1,33 @@
+<table>
+<thead>
+<th>Long Url</th>
+<th>Short url</th>
+<th> Visits count </th>
+<th>&nbsp;</th>
+</thead>
+<tbody>
+<% for url in @short_urls %>
+<tr>
+	<td><%= url.long_url %></td>
+	<td><%= url.shorty %></td>
+	<td><%= url.visits_count %></td>
+	<td><a href="javascript:void(0);" class="small" id='<%= "delete-#{url.id}" %>' onclick='Track(<%= "#{url.id}"%>);'>
+                        <i class="small">Track</i>
+                      </a></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+<script>
+	function Track(u_id) {
+    $.ajax({
+      url: '/shortUrl/'+u_id,
+      type: 'PATCH',
+      data: {id: u_id, track: 1},
+      success: function(result){
+      }
+    });
+
+  }
+</script>

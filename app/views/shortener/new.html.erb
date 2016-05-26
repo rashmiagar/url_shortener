@@ -1,0 +1,4 @@
+<%= form_for(@short_url, :url => '/shortUrl') do |f| %>
+  <%=f.text_field :long_url %>
+  <%=f.submit 'Shorten URL', class: "btn btn-primary" %>
+<% end %>

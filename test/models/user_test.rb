@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+	
+  # user = User.new(name: "John",
+		# 		  email: "john@gmail.com",
+		# 		  password: "foo")
+
 end

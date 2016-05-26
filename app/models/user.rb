@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 	before_save :encrypt_password
 	after_save :clear_password
 	before_create :set_api_token
-
+	has_many :shortUrls
 
   validates :name,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

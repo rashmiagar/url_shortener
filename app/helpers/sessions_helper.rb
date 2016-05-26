@@ -1,8 +1,7 @@
 module SessionsHelper
 	def current_user
-		puts session[:user_id]
-		 @current_user ||= User.find(session[:user_id]) unless session[:user_id].nil?
-		end
+	  @current_user ||= User.find(session[:user_id]) unless session[:user_id].nil?
+	end
 
 	def user_signed_in?
 	  !current_user.nil?
