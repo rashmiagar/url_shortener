@@ -1,8 +1,9 @@
 class ShortUrl < ActiveRecord::Base
 
 	belongs_to :user
-	has_many :short_visits
-	
+	has_many :short_visits, dependent: :destroy
+
+
 	validates :long_url, presence: true, 
 						format: { with: /[^(http|https):\/\/]/ },
             uniqueness: {scope: :user_id}

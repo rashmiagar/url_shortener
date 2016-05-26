@@ -5,6 +5,7 @@ class ShortenerController < ApplicationController
 	  @short_urls = @current_user.shortUrls
 	end
 
+	# TODO: extract into a service
 	def show
 	  @short_url = ShortUrl.find_by(shorty: params[:id])
 	  @short_url.visits_count += 1

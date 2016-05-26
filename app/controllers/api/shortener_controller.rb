@@ -11,20 +11,19 @@ class Api::ShortenerController < Api::BaseController
   end
   
   def create
-    @short_url = ShortUrl.new(short_url_params)
-    respond_to do |format|
-      @short_url.shorty = @short_url.id.to_i.to_s(36)
-      @short_url.user = @current_user
-  
-      if @short_url.save 
-  	    render json: {success: true}
-      else 
-  	    render json: {success: false}
-      end
-    end
-	end
+  	hash = ActiveSupport::HashWithIndifferentAccess.new(short_url_params)  # TODO: handle missing params
+    @short_url = ShortUrl.new(hash)
+    @short_url.shorty = @short_url.id.to_i.to_s(36)
+    @short_url.user = @current_user
 
-	def delete
+    if @short_url.save 
+	    render json: {success: true}
+    else 
+	    render json: {success: false, message: @short_url.errors.full_messages}
+    end
+  end
+
+	def destroy
 	  short_url = ShortUrl.find(params[:id])  # TODO: exception handling
 	  short_url.delete
 	  render json: {success: true}
@@ -32,7 +31,7 @@ class Api::ShortenerController < Api::BaseController
 
 	def track
 		if params[:url].present?
-			url = ShortUrl.find_by(shorty: params[:url])
+			url = ShortUrl.find_by(shorty: short_url_params[:url])
 			if url
 				url.update(track: true)
 	    	render json: {success: true, message: "Tracking url"}
@@ -45,7 +44,7 @@ class Api::ShortenerController < Api::BaseController
 	end
 	def untrack
 		if params.present?
-		  url = ShortUrl.find_by(shorty: params[:url])
+		  url = ShortUrl.find_by(shorty: short_url_params[:url])
 		  if url
 		    url.update(track: false)
 		    render json: {success: true, message: "Untracking url"}
@@ -56,4 +55,9 @@ class Api::ShortenerController < Api::BaseController
 	  	render json: {success: false, message: "Missing url"}
 	  end
 	end
+
+ private
+	def short_url_params
+	  	params.require(:short_url).permit(:url, :long_url)
+	  end
 end
